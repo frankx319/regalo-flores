@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Para vos 🌻</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            background: linear-gradient(
+                to bottom,
+                #87CEEB 0%,
+                #dff6ff 48%,
+                #9bd36a 48%,
+                #6caf45 100%
+            );
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: flex-start;
+
+            overflow-x: hidden;
+
+            overflow-y: auto;
+
+            padding: 35px 15px 50px;
+
+        }
+
+
+        /* =========================
+           CONTENEDOR PRINCIPAL
+        ========================= */
+
+        .contenedor {
+
+            width: 100%;
+
+            max-width: 700px;
+
+            text-align: center;
+
+            position: relative;
+
+            z-index: 10;
+
+        }
+
+
+        /* =========================
+           FLOR
+        ========================= */
+
+        .flor {
+
+            position: relative;
+
+            width: 180px;
+
+            height: 230px;
+
+            margin: 0 auto 10px;
+
+            transform-origin: bottom;
+
+            animation:
+                crecer 2s ease forwards,
+                balancear 4s ease-in-out infinite 2s;
+
+            transform: scale(0);
+
+        }
+
+
+        /* TALLO */
+
+        .tallo {
+
+            position: absolute;
+
+            width: 12px;
+
+            height: 150px;
+
+            background: #3c8f35;
+
+            left: 84px;
+
+            top: 80px;
+
+            border-radius: 10px;
+
+        }
+
+
+        /* HOJAS */
+
+        .hoja {
+
+            position: absolute;
+
+            width: 65px;
+
+            height: 30px;
+
+            background: #4cae40;
+
+            border-radius: 100% 0 100% 0;
+
+        }
+
+
+        .hoja1 {
+
+            left: 25px;
+
+            top: 150px;
+
+            transform: rotate(25deg);
+
+        }
+
+
+        .hoja2 {
+
+            right: 20px;
+
+            top: 120px;
+
+            transform: rotate(-25deg);
+
+        }
+
+
+        /* =========================
+           PÉTALOS
+        ========================= */
+
+        .petalo {
+
+            position: absolute;
+
+            width: 55px;
+
+            height: 90px;
+
+            background: #FFD21F;
+
+            border-radius: 50%;
+
+            left: 62px;
+
+            top: 5px;
+
+            transform-origin: 28px 85px;
+
+        }
+
+
+        .p1 { transform: rotate(0deg); }
+
+        .p2 { transform: rotate(45deg); }
+
+        .p3 { transform: rotate(90deg); }
+
+        .p4 { transform: rotate(135deg); }
+
+        .p5 { transform: rotate(180deg); }
+
+        .p6 { transform: rotate(225deg); }
+
+        .p7 { transform: rotate(270deg); }
+
+        .p8 { transform: rotate(315deg); }
+
+
+        /* =========================
+           CENTRO DE LA FLOR
+        ========================= */
+
+        .centro {
+
+            position: absolute;
+
+            width: 70px;
+
+            height: 70px;
+
+            background: #704214;
+
+            border-radius: 50%;
+
+            left: 55px;
+
+            top: 50px;
+
+            box-shadow:
+                inset 0 0 0 8px #8b551f;
+
+        }
+
+
+        /* =========================
+           TÍTULO
+        ========================= */
+
+        h1 {
+
+            margin: 10px 0 25px;
+
+            color: white;
+
+            font-size: clamp(
+                32px,
+                7vw,
+                52px
+            );
+
+            text-shadow:
+                2px 2px 5px rgba(0,0,0,.4);
+
+            opacity: 0;
+
+            animation:
+                aparecer 2s ease forwards;
+
+            animation-delay: 2s;
+
+        }
+
+
+        /* =========================
+           POEMA
+        ========================= */
+
+        .poema {
+
+            width: 100%;
+
+            padding: 25px 30px;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.88
+            );
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 8px 30px rgba(
+                    0,
+                    0,
+                    0,
+                    0.20
+                );
+
+            color: #493b2a;
+
+            font-size: clamp(
+                17px,
+                3.8vw,
+                22px
+            );
+
+            line-height: 1.65;
+
+            text-align: center;
+
+            opacity: 0;
+
+            animation:
+                aparecer 2s ease forwards;
+
+            animation-delay: 3s;
+
+        }
+
+
+        /* Separación entre estrofas */
+
+        .estrofa {
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .estrofa:last-child {
+
+            margin-bottom: 0;
+
+        }
+
+
+        /* =========================
+           PÉTALOS QUE CAEN
+        ========================= */
+
+        .petalo-caida {
+
+            position: fixed;
+
+            top: -50px;
+
+            width: 15px;
+
+            height: 25px;
+
+            background: #FFD21F;
+
+            border-radius:
+                100% 0 100% 0;
+
+            animation:
+                caer linear infinite;
+
+            z-index: 1;
+
+        }
+
+
+        /* =========================
+           ANIMACIONES
+        ========================= */
+
+        @keyframes crecer {
+
+            from {
+
+                transform:
+                    scale(0);
+
+            }
+
+            to {
+
+                transform:
+                    scale(1);
+
+            }
+
+        }
+
+
+        @keyframes balancear {
+
+            0%, 100% {
+
+                transform:
+                    rotate(-2deg);
+
+            }
+
+            50% {
+
+                transform:
+                    rotate(2deg);
+
+            }
+
+        }
+
+
+        @keyframes aparecer {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(25px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        @keyframes caer {
+
+            0% {
+
+                transform:
+                    translateY(-50px)
+                    rotate(0deg);
+
+                opacity: 0;
+
+            }
+
+
+            10% {
+
+                opacity: 1;
+
+            }
+
+
+            100% {
+
+                transform:
+                    translateY(110vh)
+                    rotate(360deg);
+
+                opacity: 0;
+
+            }
+
+        }
+
+
+        /* =========================
+           CELULAR
+        ========================= */
+
+        @media (max-width: 500px) {
+
+            body {
+
+                padding-top: 20px;
+
+                padding-left: 10px;
+
+                padding-right: 10px;
+
+            }
+
+
+            .flor {
+
+                transform: scale(0.85);
+
+                margin-bottom: -20px;
+
+            }
+
+
+            h1 {
+
+                margin-top: 0;
+
+                margin-bottom: 18px;
+
+            }
+
+
+            .poema {
+
+                padding: 20px 18px;
+
+                font-size: 17px;
+
+                line-height: 1.55;
+
+            }
+
+
+            .estrofa {
+
+                margin-bottom: 18px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="contenedor">
+
+
+        <!-- =====================
+             FLOR
+        ====================== -->
+
+        <div class="flor">
+
+            <div class="tallo"></div>
+
+            <div class="hoja hoja1"></div>
+
+            <div class="hoja hoja2"></div>
+
+
+            <div class="petalo p1"></div>
+
+            <div class="petalo p2"></div>
+
+            <div class="petalo p3"></div>
+
+            <div class="petalo p4"></div>
+
+            <div class="petalo p5"></div>
+
+            <div class="petalo p6"></div>
+
+            <div class="petalo p7"></div>
+
+            <div class="petalo p8"></div>
+
+
+            <div class="centro"></div>
+
+        </div>
+
+
+
+        <!-- =====================
+             TÍTULO
+        ====================== -->
+
+        <h1>
+            Para vos 🌻
+        </h1>
+
+
+
+        <!-- =====================
+             POEMA
+        ====================== -->
+
+        <div class="poema">
+
+
+            <div class="estrofa">
+
+                Hoy te regalo flores amarillas,<br>
+
+                pero no alcanzan para explicar<br>
+
+                todo lo bonito que provocás<br>
+
+                cuando te veo sonreír y mirar.
+
+            </div>
+
+
+            <div class="estrofa">
+
+                Te las doy porque entre tantos colores,<br>
+
+                estas me hicieron pensar en vos:<br>
+
+                cálida, hermosa y especial,<br>
+
+                como un pequeño pedacito de sol.
+
+            </div>
+
+
+            <div class="estrofa">
+
+                Y si estas flores algún día se marchitan,<br>
+
+                que quede al menos esta intención:<br>
+
+                que cada pétalo te recuerde<br>
+
+                que hoy te las entrego con el corazón.
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         PÉTALOS FLOTANDO
+    ========================== -->
+
+
+    <div
+        class="petalo-caida"
+        style="
+            left: 8%;
+            animation-duration: 7s;
+        ">
+    </div>
+
+
+    <div
+        class="petalo-caida"
+        style="
+            left: 23%;
+            animation-duration: 9s;
+        ">
+    </div>
+
+
+    <div
+        class="petalo-caida"
+        style="
+            left: 42%;
+            animation-duration: 6s;
+        ">
+    </div>
+
+
+    <div
+        class="petalo-caida"
+        style="
+            left: 61%;
+            animation-duration: 8s;
+        ">
+    </div>
+
+
+    <div
+        class="petalo-caida"
+        style="
+            left: 78%;
+            animation-duration: 10s;
+        ">
+    </div>
+
+
+    <div
+        class="petalo-caida"
+        style="
+            left: 92%;
+            animation-duration: 7s;
+        ">
+    </div>
+
+
+</body>
+
+</html>

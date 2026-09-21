@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Una entrega especial</title>
+
+    <style>
+
+        body {
+            margin: 0;
+
+            min-height: 100vh;
+
+            background: #f5f5fa;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: Arial, sans-serif;
+        }
+
+        .contenedor {
+            text-align: center;
+        }
+
+        .gif {
+            width: min(90vw, 800px);
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 10px 35px rgba(0,0,0,0.2);
+
+            cursor: pointer;
+
+            transition: transform 0.3s ease;
+        }
+
+        .gif:hover {
+            transform: scale(1.03);
+        }
+
+        .texto {
+            margin-top: 15px;
+
+            color: #444;
+
+            font-size: 18px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="contenedor">
+
+        <!-- AL HACER CLICK EN EL GIF -->
+        <!-- SE ABRE flores.html -->
+
+        <a href="flores.html">
+
+            <img
+                src="abogado.gif"
+                class="gif"
+                alt="Una entrega especial"
+            >
+
+        </a>
+
+
+        <div class="texto">
+            Hacé click en el documento 📄
+        </div>
+
+    </div>
+
+</body>
+
+</html>
